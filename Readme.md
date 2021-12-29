@@ -12,6 +12,8 @@ All songs must be named in the following format:
 The `ID` refers to an integer which is used to group songs into different playlists. 
 The current implementation allows four playlists with IDs `1` to `4`.
 
+<img src="img/sample/Settings.png" alt="Jukeberry-SettingsMenu" width="500"/>
+
 ## License
 The project is licensed under the MIT License - see the LICENSE file for details.
 For the used fonts the corresponding license file is given in the respective directories.
