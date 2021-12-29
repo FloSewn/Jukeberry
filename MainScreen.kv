@@ -1,0 +1,158 @@
+# File name: MainScreen.kv
+#:import C kivy.utils.get_color_from_hex
+#:import hex kivy.utils.get_color_from_hex
+#:import MainScreen MainScreen
+
+<MainScreen@Screen>:
+    name: 'main_screen'
+
+    #=======================================================
+    # Define the screen background
+    #=======================================================
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'img/background.png'
+
+    #=======================================================
+    # Properties button
+    #=======================================================
+    FloatLayout:
+        Button:
+            pos_hint: {"x": 0.01, "top" : 0.99}
+            size_hint: None, None
+            size: 40, 40
+            background_normal: 'img/properties.png'
+            background_down: 'img/properties.png'
+            #on_press: root.show_settings_screen()
+            on_press: root.show_password_screen()
+
+    #=======================================================
+    # Main screen
+    #=======================================================
+    BoxLayout:
+        orientation: 'horizontal'
+        minimum_width: 800
+        padding: [5,5,5,5]
+        size_hint: None, None
+        size: 760, 440
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        spacing: 30
+
+        #===================================================
+        # Left:
+        #===================================================
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: 380, 440
+            pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+
+            #===============================================
+            # Bottom: Next songs (next 3 songs in playlist)
+            #===============================================
+            FloatLayout:
+                size_hint: None, None
+                size: 420, 450
+                orientation: "vertical"
+
+                #===========================================
+                # JukeBox Title
+                #===========================================
+                Label:
+                    text: "JukeBox"
+                    font_name: 'BungeeShade'
+                    font_size: 46
+                    bold: True
+                    color: C('fbf5e7ff')
+                    size_hint: None, None
+                    size: 200, 40
+                    pos: [110, 400]
+
+                #===========================================
+                # Current song presentation
+                #===========================================
+                Label:
+                    id: artist_label
+                    text: "Current Artist"
+                    font_name: 'BungeeInline'
+                    font_size: 26
+                    color: C('fbf5e7ff')
+                    size_hint: None, None
+                    size: 200, 50
+                    pos: [110, 200]
+
+                Label:
+                    id: title_label
+                    text: "Current Song"
+                    font_name: 'BungeeInline'
+                    font_size: 26
+                    color: C('fbf5e7ff')
+                    size_hint: None, None
+                    size: 200, 50
+                    pos: [110, 150]
+
+
+                #===========================================
+                # Next song presentation
+                #===========================================
+                Label:
+                    text: "Next Song"
+                    font_name: 'BungeeInline'
+                    font_size: 16
+                    color: C('fbf5e7ff')
+                    size_hint: None, None
+                    size: 200, 30
+                    pos: [110, 75]
+
+                RecycleView:
+                    id: playlist_scrollview
+                    scroll_timeout: 250
+                    scroll_distance: 20
+                    bar_width: 0
+                    size_hint: None, None
+                    size: 280, 40
+                    pos: [70, 45]
+                    do_scroll_x: False
+                    do_scroll_y: False
+
+                    #canvas.before:
+                    #    Rectangle:
+                    #        pos: self.pos
+                    #        size: self.size
+                    #        source: 'img/preview.png'
+
+                    BoxLayout:
+                        id: playlist_boxlayout
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 10
+
+
+
+        #===================================================
+        # Right: SongPool
+        #===================================================
+        BoxLayout:
+            size_hint: None, None
+            size: 360, 440
+            pos_hint: {'center_x':0.5, 'center_y':0.5}
+
+            RecycleView:
+                id: songpool_scrollview
+                scroll_timeout: 400
+                scroll_distance: 5
+                do_scroll_x: False
+                bar_width: 20
+                bar_margin: -5
+                scroll_type: ['content','bars']
+
+                BoxLayout:
+                    id: songpool_boxlayout
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+            

@@ -1,0 +1,58 @@
+#:import C kivy.utils.get_color_from_hex
+#:import SwipeButton SwipeButton
+
+<SwipeButton>:
+    text: ''
+    size_hint_y: None
+    direction: 'right'
+    height: 80 #48
+    ignore_perpendicular_swipes: True
+    min_move: 10 / self.width
+    loop: True
+    anim_type: "out_sine"
+    scroll_distance: 20   
+    scroll_timeout: 200   # ! Must match to dpi of display !
+
+    #===================================================
+    # This is the default label on the swipe button
+    #===================================================
+    Button:
+        background_normal: 'img/button.png'
+        background_down: 'img/button.png'
+        size_hint: .95,.75
+        text: root.text
+        font_name: 'Bungee'
+        font_size: 14
+        bold: False
+        color: C('fbf5e7ff')
+        on_press: root.press_add_button() #root.load_next() 
+
+    #===================================================
+    # This is the button to queue the song
+    #===================================================
+    Button:
+        background_normal: 'img/button.png'
+        background_down: 'img/button.png'
+        size_hint: .95,.75
+        text: 'Add to playlist'
+        font_name: 'Bungee'
+        font_size: 16
+        bold: False
+        color: C('fbf5e7ff')
+        on_press: root.add_song_to_playlist()
+
+    #===================================================
+    # This is the button to show that no more space 
+    # is available in the playlist     
+    #===================================================
+    Button:
+        background_normal: 'img/button.png'
+        background_down: 'img/button.png'
+        size_hint: .95,.75
+        text: 'Playlist is full. Try again later.'
+        font_name: 'Bungee'
+        font_size: 16
+        bold: False
+        color: C('fbf5e7ff')
+
+

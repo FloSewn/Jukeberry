@@ -1,0 +1,226 @@
+# File name: SettingsScreen.kv
+#: import CheckBox kivy.uix.checkbox
+
+
+<SongpoolControlRow>:
+    spacing: 25
+    size_hint_y: None
+    size_hint_x: None
+    height: 50
+    width: 500
+    Label:
+        text: "{:} - {:}".format(root.artist, root.title)
+        font_name: 'Bungee'
+        font_size: 18
+        color: 0.3, 0.3, 0.3, 1.0
+    CheckBox:
+        id: CheckBox
+        text: 'CheckBox'
+        active: root.available
+        on_active: root.set_checkbox(self.active)
+        color: 0.1, 0.1, 0.1, 1.0
+
+
+<SettingsScreen@Screen>:
+    name: 'settings_screen'
+
+    #=======================================================
+    # Define the screen background
+    #=======================================================
+    canvas.before:
+        Color:
+            rgba: C('efd593ff')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'horizontal'
+        minimum_width: 300
+        size_hint: 1, 1
+        padding: [5,5,5,5]
+
+        #===================================================
+        # Left:
+        #===================================================
+        BoxLayout:
+            orientation: 'vertical'
+            size: 290, 470
+            size_hint: None, None
+            spacing: 20
+
+            #===============================================
+            # Back-to-player button
+            #===============================================
+            Button:
+                text: 'Go Back'
+                font_name: 'Bungee'
+                font_size: 20
+                bold: True
+                color: C('fbf5e7ff')
+                on_press: root.show_main_screen()
+                background_normal: 'img/button.png'
+                background_down: 'img/button.png'
+                size_hint: None, None 
+                size: 300, 50
+
+            #===============================================
+            # Next-song button 
+            #===============================================
+            Button:
+                id: next_song_button
+                text: 'Next Song'
+                font_name: 'Bungee'
+                font_size: 20
+                bold: True
+                color: C('fbf5e7ff')
+                on_press: root.main_screen.play_next_song()
+                background_normal: 'img/button.png'
+                background_down: 'img/button.png'
+                size_hint: None, None 
+                size: 300, 50
+
+            #===============================================
+            # Exit button 
+            #===============================================
+            Button:
+                id: exit_button
+                text: 'Close app'
+                font_name: 'Bungee'
+                font_size: 20
+                bold: True
+                color: C('fbf5e7ff')
+                on_press: root.main_screen.close_app()
+                background_normal: 'img/button.png'
+                background_down: 'img/button.png'
+                size_hint: None, None 
+                size: 300, 50
+
+            #===============================================
+            # Volume slider
+            #===============================================
+            BoxLayout:
+                orientation: 'horizontal'
+
+                Label:
+                    text: 'Volume'
+                    font_name: 'Bungee'
+                    font_size: 20
+                    bold: True
+                    color: 0.3, 0.3, 0.3, 1.0
+                Slider:
+                    id: volume_slider
+                    min: 0
+                    max: 1
+                    step: 0.05
+                    value: 1.0
+                    orientation: 'horizontal'
+
+            #===============================================
+            # Song-Fading slider
+            #===============================================
+            BoxLayout:
+                orientation: 'horizontal'
+
+                Label:
+                    text: 'Fading'
+                    font_name: 'Bungee'
+                    font_size: 20
+                    bold: True
+                    color: 0.3, 0.3, 0.3, 1.0
+                Slider:
+                    id: fading_slider
+                    min: 0.05
+                    max: 0.95
+                    step: 0.1
+                    value: 0.95
+                    orientation: 'horizontal'
+
+        #===================================================
+        # Right: Song category checkboxes
+        #===================================================
+        BoxLayout:
+            orientation: 'vertical'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Playlist #1" 
+                    size_hint_x: .80
+                    font_name: 'Bungee'
+                    font_size: 20
+                    color: 0.3, 0.3, 0.3, 1.0
+                CheckBox: 
+                    active: True
+                    color: C('301e0f')
+                    on_active: root.set_song_category(self.active, 0)
+                    size_hint_x: .20
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Playlist #2" 
+                    size_hint_x: .80
+                    font_name: 'Bungee'
+                    font_size: 20
+                    color: 0.3, 0.3, 0.3, 1.0
+                CheckBox: 
+                    active: True
+                    color: C('301e0f')
+                    on_active: root.set_song_category(self.active, 1)
+                    size_hint_x: .20
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Playlist #3" 
+                    size_hint_x: .80
+                    font_name: 'Bungee'
+                    font_size: 20
+                    color: 0.3, 0.3, 0.3, 1.0
+                CheckBox: 
+                    active: False
+                    color: C('301e0f')
+                    on_active: root.set_song_category(self.active, 2)
+                    size_hint_x: .20
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "Playlist #4" 
+                    size_hint_x: .80
+                    font_name: 'Bungee'
+                    font_size: 20
+                    color: 0.3, 0.3, 0.3, 1.0
+                CheckBox: 
+                    active: False
+                    color: C('301e0f')
+                    on_active: root.set_song_category(self.active, 3)
+                    size_hint_x: .20
+
+
+            #===============================================
+            # SongpoolControl - list of all available songs 
+            # and corresponding checkbox, if song is active
+            #===============================================
+            BoxLayout:
+                size_hint: None, None
+                size: 460, 300
+                pos_hint: {'center_x':0.5, 'center_y':0.7}
+
+                RecycleView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: 20
+                    bar_margin: -10
+                    scroll_type: ['content','bars']
+                    SongpoolControl: 
+                        id: songpool_control
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding: 50, 50, 50, 50
+
+
+
+
