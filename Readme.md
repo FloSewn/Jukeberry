@@ -1,6 +1,6 @@
 # Jukeberry
 ---------------------------
-<img src="img/sample/Main.png" alt="Jukeberry-MainMenu" width="800"/>
+<img src="img/sample/Main.png" alt="Jukeberry-MainMenu" width="600"/>
 
 Jukeberry is a small Python/Kivy application to use your Raspberry Pi as a jukebox.
 
@@ -12,7 +12,7 @@ All songs must be named in the following format:
 The `ID` refers to an integer which is used to group songs into different playlists. 
 The current implementation allows four playlists with IDs `1` to `4`.
 
-<img src="img/sample/Settings.png" alt="Jukeberry-SettingsMenu" width="800"/>
+<img src="img/sample/Settings.png" alt="Jukeberry-SettingsMenu" width="600"/>
 
 ## License
 The project is licensed under the MIT License - see the LICENSE file for details.
